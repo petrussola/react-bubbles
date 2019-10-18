@@ -13,12 +13,12 @@ import "./styles.scss";
 const loginEndPoint = "http://localhost:5000/api/login";
 
 function App(props) {
-  debugger
   const onSubmitLoginForm = (values, actions) => {
     axios
       .post(loginEndPoint, values)
       .then(res => {
         localStorage.setItem("authorization", res.data.payload);
+        props.history.push('/bubbles')
         actions.resetForm();
 
       })
