@@ -35,12 +35,18 @@ function App(props) {
       });
   };
 
+  // SET COLORS
+
+  const setListOfColors = data => {
+    setColorList(data);
+  }
+
   // FETCH COLORS FROM API
   const fetchColorsApi = () => {
     withAuth()
       .get(colorsEndPoint)
       .then(resp => {
-        setColorList(resp.data)
+        setListOfColors(resp.data)
       })
       .catch(error => {
         debugger
