@@ -17,8 +17,9 @@ function App() {
     axios
       .post(loginEndPoint, values)
       .then(res => {
-        localStorage.setItem('authorization', res.data.payload)
-        debugger;
+        localStorage.setItem("authorization", res.data.payload);
+        actions.resetForm();
+        
       })
       .catch(error => {
         alert(error.response.data.error);
