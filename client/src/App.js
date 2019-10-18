@@ -57,8 +57,6 @@ function App(props) {
             <Login
               {...props}
               onSubmitLoginForm={onSubmitLoginForm}
-              colorList={colorList}
-              setColorList={setColorList}
             />
           );
         }}
@@ -71,6 +69,8 @@ function App(props) {
         path="/bubbles"
         component={BubblePage}
         fetchColorsApi={fetchColorsApi}
+        colorList={colorList}
+        setColorList={setColorList}
       />
     </div>
   );
