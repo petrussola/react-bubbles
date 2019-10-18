@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
 // DEPENDENCIES
-import { Route, withRouter } from "react-router-dom";
+import { Route, withRouter, Redirect } from "react-router-dom";
 import axios from "axios";
 
 // COMPONENTS
 import Login from "./components/Login";
+import BubblePage from './components/BubblePage';
 
 // CSS
 import "./styles.scss";
@@ -40,8 +41,22 @@ function App(props) {
           Build a PrivateRoute component that will 
           display BubblePage when you're authenticated 
         */}
+        <PrivateRoute path='/bubbles' component={BubblePage} />
       </div>
   );
+}
+
+const PrivateRoute = ({component: Component, ...rest}) => {
+  return (
+    <Route {...rest}
+    render={props => 
+    localStorage.getItem('authorization') ? (
+      <Component {...props} />
+    ) : (
+      <Redirect to='/'/>
+    )}
+     />
+  )
 }
 
 export default withRouter(App);
