@@ -1,7 +1,6 @@
 import React from "react";
-import { Formik, Form, Field, FieldArray } from "formik";
+import { Formik, Form, Field } from "formik";
 import withAuth from "../axios/axios";
-import axios from "axios";
 
 const newColorFormInitialValue = {
   color: "",
