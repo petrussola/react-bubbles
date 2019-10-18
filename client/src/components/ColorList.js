@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import withAuth from "../axios/axios";
 
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
+
+const colorsEndPoint = "http://localhost:5000/api/colors";
 
 const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
@@ -25,6 +28,16 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    withAuth()
+      .delete(`${colorsEndPoint}/${color.id}`)
+      .then(resp => {
+        updateColors(colors.filter(item => {
+          return item.id !== resp.data;
+        }))
+      })
+      .catch(error => {
+        debugger;
+      });
   };
 
   return (
