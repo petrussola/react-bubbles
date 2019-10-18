@@ -43,7 +43,7 @@ function App(props) {
         setColorList(resp.data)
       })
       .catch(error => {
-        debugger
+        alert(error.message)
       });
   };
 

@@ -12,7 +12,6 @@ const colorsEndPoint = "http://localhost:5000/api/colors";
 
 export default function NewColorForm({updateColors}) {
   const onSubmitForm = values => {
-    debugger;
     withAuth()
       .post(colorsEndPoint, {
         color: values.color,
@@ -21,11 +20,10 @@ export default function NewColorForm({updateColors}) {
         }
       })
       .then(res => {
-        debugger;
-        updateColors(res.data)
+        updateColors(res.data);
       })
       .catch(error => {
-        debugger;
+        alert(error.message);
       });
   };
 

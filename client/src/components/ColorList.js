@@ -38,7 +38,7 @@ const ColorList = ({ colors, updateColors }) => {
         );
       })
       .catch(error => {
-        debugger;
+        alert(error.message)
       });
   };
 
@@ -63,7 +63,7 @@ const ColorList = ({ colors, updateColors }) => {
       <p>colors</p>
       <ul>
         {colors.map(color => (
-          <li key={color.color} onClick={() => editColor(color)}>
+          <li key={color.id} onClick={() => editColor(color)}>
             <span>
               <span className="delete" onClick={() => deleteColor(color)}>
                 x
