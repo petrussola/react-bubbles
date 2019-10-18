@@ -15,7 +15,7 @@ import withAuth from "./axios/axios";
 import "./styles.scss";
 
 const loginEndPoint = "http://localhost:5000/api/login";
-const fetchColorsEndPoint = "http://localhost:5000/api/colors";
+const colorsEndPoint = "http://localhost:5000/api/colors";
 
 function App(props) {
   // SLICES OF STATE
@@ -38,7 +38,7 @@ function App(props) {
   // FETCH COLORS FROM API
   const fetchColorsApi = () => {
     withAuth()
-      .get(fetchColorsEndPoint)
+      .get(colorsEndPoint)
       .then(resp => {
         setColorList(resp.data)
       })
