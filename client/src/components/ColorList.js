@@ -31,7 +31,7 @@ const ColorList = ({ colors, updateColors }) => {
     <div className="colors-wrap">
       <p>colors</p>
       <ul>
-        {colors.map(color => (
+        {/* {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
             <span>
               <span className="delete" onClick={() => deleteColor(color)}>
@@ -44,7 +44,7 @@ const ColorList = ({ colors, updateColors }) => {
               style={{ backgroundColor: color.code.hex }}
             />
           </li>
-        ))}
+        ))} */}
       </ul>
       {editing && (
         <form onSubmit={saveEdit}>
