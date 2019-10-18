@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import axios from "axios";
+import withAuth from "../axios/axios";
+import NewColorForm from "./NewColorForm";
 
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
+const colorsEndPoint = "http://localhost:5000/api/colors";
+
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -21,10 +23,37 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+    withAuth()
+      .put(`${colorsEndPoint}/${colorToEdit.id}`, colorToEdit)
+      .then(resp => {
+        updateColors(
+          colors.map(item => {
+            if (item.id === resp.data.id) {
+              return resp.data;
+            }
+            return item;
+          })
+        );
+      })
+      .catch(error => {
+        alert(error.message)
+      });
   };
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    withAuth()
+      .delete(`${colorsEndPoint}/${color.id}`)
+      .then(resp => {
+        updateColors(
+          colors.filter(item => {
+            return item.id !== resp.data;
+          })
+        );
+      })
+      .catch(error => {
+        alert(error.message);
+      });
   };
 
   return (
@@ -32,7 +61,7 @@ const ColorList = ({ colors, updateColors }) => {
       <p>colors</p>
       <ul>
         {colors.map(color => (
-          <li key={color.color} onClick={() => editColor(color)}>
+          <li key={color.id} onClick={() => editColor(color)}>
             <span>
               <span className="delete" onClick={() => deleteColor(color)}>
                 x
@@ -76,6 +105,7 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
+      <NewColorForm updateColors={updateColors} colors={colors} />
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
     </div>
