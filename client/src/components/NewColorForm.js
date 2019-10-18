@@ -17,7 +17,7 @@ export default function NewColorForm({updateColors}) {
       .post(colorsEndPoint, {
         color: values.color,
         code: {
-          hex: values.hex
+          hex: `#${values.hex}`
         }
       })
       .then(res => {
