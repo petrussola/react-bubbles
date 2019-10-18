@@ -24,16 +24,33 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+    withAuth()
+      .put(`${colorsEndPoint}/${colorToEdit.id}`, colorToEdit)
+      .then(resp => {
+        updateColors(
+          colors.map(item => {
+            if (item.id === resp.data.id) {
+              return resp.data;
+            }
+            return item;
+          })
+        );
+      })
+      .catch(error => {
+        debugger;
+      });
   };
 
   const deleteColor = color => {
     // make a delete request to delete this color
     withAuth()
-      .delete('`${colorsEndPoint}/${color.id}`')
+      .delete(`${colorsEndPoint}/${color.id}`)
       .then(resp => {
-        updateColors(colors.filter(item => {
-          return item.id !== resp.data;
-        }))
+        updateColors(
+          colors.filter(item => {
+            return item.id !== resp.data;
+          })
+        );
       })
       .catch(error => {
         alert(error.message);
