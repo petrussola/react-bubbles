@@ -15,7 +15,7 @@ const BubblePage = ({fetchColorsApi, colorList, setColorList}) => {
   return (
     <>
       <ColorList colors={colorList} updateColors={setColorList} />
-      <Bubbles colors={colorList} />
+      {/* <Bubbles colors={colorList} /> */}
     </>
   );
 };

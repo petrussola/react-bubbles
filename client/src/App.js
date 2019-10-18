@@ -40,11 +40,10 @@ function App(props) {
     withAuth()
       .get(fetchColorsEndPoint)
       .then(resp => {
-        
-        debugger;
+        setColorList(resp.data)
       })
       .catch(error => {
-        debugger;
+        debugger
       });
   };
 
