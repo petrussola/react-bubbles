@@ -29,14 +29,14 @@ const ColorList = ({ colors, updateColors }) => {
   const deleteColor = color => {
     // make a delete request to delete this color
     withAuth()
-      .delete(`${colorsEndPoint}/${color.id}`)
+      .delete('`${colorsEndPoint}/${color.id}`')
       .then(resp => {
         updateColors(colors.filter(item => {
           return item.id !== resp.data;
         }))
       })
       .catch(error => {
-        debugger;
+        alert(error.message);
       });
   };
 
