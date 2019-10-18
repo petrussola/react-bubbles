@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // DEPENDENCIES
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import axios from "axios";
 
 // COMPONENTS
@@ -12,14 +12,15 @@ import "./styles.scss";
 
 const loginEndPoint = "http://localhost:5000/api/login";
 
-function App() {
+function App(props) {
+  debugger
   const onSubmitLoginForm = (values, actions) => {
     axios
       .post(loginEndPoint, values)
       .then(res => {
         localStorage.setItem("authorization", res.data.payload);
         actions.resetForm();
-        
+
       })
       .catch(error => {
         alert(error.response.data.error);
@@ -27,7 +28,6 @@ function App() {
   };
 
   return (
-    <Router>
       <div className="App">
         <Route
           exact
@@ -41,8 +41,7 @@ function App() {
           display BubblePage when you're authenticated 
         */}
       </div>
-    </Router>
   );
 }
 
-export default App;
+export default withRouter(App);
